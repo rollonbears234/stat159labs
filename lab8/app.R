@@ -1,5 +1,5 @@
 
-# 01-kmeans-app -> Histogram app
+#Histogram app
 library(shiny)
 
 palette(c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3",
@@ -24,26 +24,10 @@ server <- function(input, output) {
   
 
   output$scat <- renderPlot({
-    plot(adData[,input$Media], adData$Sales)
+    plot(adData[,input$Media], adData$Sales, xlab = input$Media, ylab = "Sales")
+    line(adData$Sales)
   })
 
 }
 
 shinyApp(ui = ui, server = server)
-
-
-#
-# ui <- fluidPage(
-#   sliderInput(inputId = "num",
-#     label = "Choose a number",
-#     value = 25, min = 1, max = 100),
-#   plotOutput("hist")
-# )
-#
-# server <- function(input, output) {
-#   output$hist <- renderPlot({
-#     hist(rnorm(input$num))
-#   })
-# }
-#
-# shinyApp(ui = ui, server = server)
