@@ -10,7 +10,7 @@ ui <- fluidPage(
   headerPanel('Histogram of Advertising Data'),
   sidebarPanel(
     selectInput(inputId = "Media", label = "Choose a Media Outlet",
-    choices = list("Newspaper" = "Newspaper", "Radio" = "Radio", "TV" = "TV"),
+    choices = list("Newspaper","Radio", "TV")
     ),
   mainPanel(
     plotOutput('scat')
@@ -20,11 +20,11 @@ ui <- fluidPage(
 
 server <- function(input, output) {
 
-  adData = read.csv(file = "../../data/Advertising.csv")
-  dataCurr = input$Media
+  adData = read.csv(file = "Advertising.csv")
+  
 
   output$scat <- renderPlot({
-    plot(adData$dataCurr, adData$sales)
+    plot(adData[,input$Media], adData$Sales)
   })
 
 }
